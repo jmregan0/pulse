@@ -14,12 +14,23 @@ class Tabs extends Component {
   render (){
     return (
       <TabBarIOS style={styles.container}>
+
         <TabBarIOS.Item
           title="Home"
-          selected={this.state.selected == 'home'}
+          selected={this.state.selectedTab == 'home'}
           icon={require('/Users/jacobregan/Documents/Dev/Pulse/ios/Icons.xcassets/ic_layers_36pt.imageset/ic_layers_36pt.png')}
-          onPress={() => {this.setState({selectedTab: 'home'})}}>
+          onPress={ () => {this.setState({selectedTab: 'home'})}}>
+            <Text style={styles.welcome}>Home View</Text>
         </TabBarIOS.Item>
+
+        <TabBarIOS.Item
+          title="Map"
+          selected={this.state.selectedTab == 'map'}
+          icon={require('/Users/jacobregan/Documents/Dev/Pulse/ios/Icons.xcassets/ic_map_36pt.imageset/ic_map_36pt.png')}
+          onPress={ () => {this.setState({selectedTab: 'map'})}}>
+            <Text style={styles.welcome}>Maps View</Text>
+        </TabBarIOS.Item>
+
       </TabBarIOS>
     )
   }
@@ -35,7 +46,7 @@ const styles = StyleSheet.create({
   welcome: {
     fontSize: 20,
     textAlign: 'center',
-    margin: 10,
+    margin: 10
   }
 });
 
