@@ -13,6 +13,7 @@ import {
   ActivityIndicator
 } from 'react-native';
 const Login = require('./Login');
+const Tabs = require('./Tabs')
 const AuthService = require('./AuthService');
 
 const Pulse = React.createClass({
@@ -38,11 +39,8 @@ const Pulse = React.createClass({
     }
     if (this.state.isLoggedIn) {
       return (
-        <View style={styles.container}>
-          <Text style={styles.welcome}>
-            Welcome! You logged in!
-          </Text>
-        </View>
+        <Tabs />
+        // <Text style={{marginTop: 40}}>Hey there</Text>
       )
     } else {
       return (
