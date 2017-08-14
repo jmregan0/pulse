@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 // import { TabNavigator } from 'react-navigation';
 // import { Icon } from 'react-native-elements';
-import Me from './Me'
+import Me from './Me';
+import Home from './Home';
 import { Text, View, StyleSheet, TabBarIOS } from 'react-native';
 
 class Tabs extends Component {
@@ -20,7 +21,7 @@ class Tabs extends Component {
           selected={this.state.selectedTab == 'home'}
           icon={require('/Users/jacobregan/Documents/Dev/Pulse/ios/Icons.xcassets/ic_layers_36pt.imageset/ic_layers_36pt.png')}
           onPress={ () => {this.setState({selectedTab: 'home'})}}>
-            <Text style={styles.welcome}>Home View</Text>
+            <Home />
         </TabBarIOS.Item>
 
         <TabBarIOS.Item
@@ -28,7 +29,7 @@ class Tabs extends Component {
           selected={this.state.selectedTab == 'map'}
           icon={require('/Users/jacobregan/Documents/Dev/Pulse/ios/Icons.xcassets/ic_map_36pt.imageset/ic_map_36pt.png')}
           onPress={ () => {this.setState({selectedTab: 'map'})}}>
-            <Text style={styles.welcome}>Maps View</Text>
+            <Me />
         </TabBarIOS.Item>
 
       </TabBarIOS>
