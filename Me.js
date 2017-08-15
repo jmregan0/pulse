@@ -15,18 +15,57 @@ export default class Me extends Component{
   constructor(props){
     super(props);
 
-    this.state = {}
+    this.state = {
+      initialRegion: {
+        latitude: 'unknown',
+        longitude: 'unknown',
+        latitudeDelta: 'unknown',
+        longitudeDelta: 'unknown'
+      }
+    }
+
+  this.getDeltaFromCoords = function (points){
+    let minX = points.latitude,
+        maxX = points.latitude,
+        minY = points.longitude,
+        maxY = points.longitude;
+
+    minX = Math.min(minX, points.latitude);
+    maxX = Math.max(maxX, points.latitude);
+    minY = Math.min(minY, points.longitude);
+    maxY = Math.max(maxY, points.longitude);
+
+    return {
+      latitude: (minX + maxX) / 2,
+      longitude: (minY + maxY) / 2,
+      latitudeDelta: maxX - minX,
+      longitudeDelta: maxY - minY
+    }
+
   }
+
+  }
+
+  componentDidMount (){
+    navigator.geolocation.getCurrentPosition((position) => {
+
+      let rawCoords = {
+        latitude: parseFloat(position.coords.latitude),
+        longitude: parseFloat(position.coords.longitude)
+      }
+
+      let updatedPositionWithDelta = this.getDeltaFromCoords(rawCoords)
+
+      this.setState({initialRegion: updatedPositionWithDelta})
+    })
+  }
+
   render (){
     return (
+      // <Text>{console.log(this.state.initialRegion)}</Text>
       <MapView
         style={styles.map}
-        initialRegion={{
-          latitude: 41.881832,
-          longitude: -87.623177,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421
-        }}
+        initialRegion={this.state.initialRegion}
         showsUserLocation={true} />
     )
   }

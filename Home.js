@@ -19,26 +19,33 @@ export default class Home extends Component{
       latitude: 'unknown',
       longitude: 'unknown'
     }
+
   }
 
-  componentDidMount(){
-   navigator.geolocation.getCurrentPosition((position) => {
-     let lat = parseFloat(position.coords.latitude);
-     let long = parseFloat(position.coords.longitude);
-     let initialRegion = {
-       latitude: lat,
-       longitude: long
-     }
-     this.setState({latitude: lat, longitude: long})
-   })
-  }
+
+  // componentDidMount(){
+  //   // doesn't run in background
+  //  navigator.geolocation.getCurrentPosition((position) => {
+  //    let lat = parseFloat(position.coords.latitude);
+  //    let long = parseFloat(position.coords.longitude);
+
+  //    let locationObj = {latitude: lat, longitude: long}
+
+  //    let updatedLocationWithDelta = this.getDeltaFromCoords(locationObj)
+
+  //    this.setState({updatedLocationWithDelta})
+  //  })
+  // }
 
   render (){
     return (
     <Text style={{alignItems: 'center', paddingTop: 40}}>
       current latitude: {this.state.latitude}
       current longitude: {this.state.longitude}
+      current latDelta: {this.state.latitudeDelta}
+      current longDelta: {this.state.longitudeDelta}
     </Text>
     )
   }
+
 }
