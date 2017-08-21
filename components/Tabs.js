@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import { TabNavigator } from 'react-navigation';
 // import { Icon } from 'react-native-elements';
-import Me from './Me';
+import Map from './Map';
 import Home from './Home';
 import { Text, View, StyleSheet, TabBarIOS } from 'react-native';
 
@@ -29,7 +29,7 @@ class Tabs extends Component {
           selected={this.state.selectedTab == 'map'}
           icon={require('/Users/jacobregan/Documents/Dev/Pulse/ios/Icons.xcassets/ic_map_36pt.imageset/ic_map_36pt.png')}
           onPress={ () => {this.setState({selectedTab: 'map'})}}>
-            <Me />
+            <Map />
         </TabBarIOS.Item>
 
       </TabBarIOS>
