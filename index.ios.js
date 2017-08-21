@@ -13,7 +13,7 @@ import {
   ActivityIndicator
 } from 'react-native';
 const Login = require('./Login');
-const Tabs = require('./components/Tabs')
+const Tabs = require('./app/components/Tabs')
 const AuthService = require('./AuthService');
 
 const Pulse = React.createClass({
