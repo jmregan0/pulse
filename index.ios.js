@@ -5,6 +5,8 @@
  */
 
 import React, { Component } from 'react';
+import { Provider } from 'react-redux';
+import store from './app'
 import {
   AppRegistry,
   StyleSheet,
@@ -39,8 +41,9 @@ const Pulse = React.createClass({
     }
     if (this.state.isLoggedIn) {
       return (
-        <Tabs />
-        // <Text style={{marginTop: 40}}>Hey there</Text>
+        <Provider store={store}>
+          <Tabs />
+        </Provider>
       )
     } else {
       return (
