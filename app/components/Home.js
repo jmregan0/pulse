@@ -20,7 +20,6 @@ export default class Home extends Component{
 
   }
 
-
   render (){
     return (
     <Text style={{alignItems: 'center', paddingTop: 40}}>
@@ -28,5 +27,4 @@ export default class Home extends Component{
     </Text>
     )
   }
-
 }
