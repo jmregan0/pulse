@@ -32,6 +32,14 @@ class Tabs extends Component {
             <Map />
         </TabBarIOS.Item>
 
+        <TabBarIOS.Item
+          title="Friends"
+          selected={this.state.selectedTab == 'friends'}
+          icon={require('/Users/jacobregan/Documents/Dev/Pulse/ios/Icons.xcassets/ic_map_36pt.imageset/ic_map_36pt.png')}
+          onPress={ () => {this.setState({selectedTab: 'friends'})}}>
+            {/* <Map /> */}
+        </TabBarIOS.Item>
+
       </TabBarIOS>
     )
   }

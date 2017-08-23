@@ -13,4 +13,10 @@
 
 @property (nonatomic, strong) UIWindow *window;
 
+#import <Google/SignIn.h>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, GIDSignInDelegate>
+AppDelegate.h
+
+
+
 @end

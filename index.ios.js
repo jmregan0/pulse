@@ -29,27 +29,27 @@ const Pulse = React.createClass({
     })
   },
   render: function() {
-    if (this.state.checkingAuth){
-      return (
-        <View style={styles.container}>
-          <ActivityIndicator
-            animating={true}
-            size="large"
-            style={styles.loader} />
-        </View>
-      )
-    }
-    if (this.state.isLoggedIn) {
-      return (
-        <Provider store={store}>
-          <Tabs />
-        </Provider>
-      )
-    } else {
+    // if (this.state.checkingAuth){
+    //   return (
+    //     <View style={styles.container}>
+    //       <ActivityIndicator
+    //         animating={true}
+    //         size="large"
+    //         style={styles.loader} />
+    //     </View>
+    //   )
+    // }
+    // if (this.state.isLoggedIn) {
+    //   return (
+    //     <Provider store={store}>
+    //       <Tabs />
+    //     </Provider>
+    //   )
+    // } else {
       return (
         <Login onLogin={this.onLogin} />
       );
-    }
+    // }
   },
   onLogin: function(){
      this.setState({isLoggedIn: true})

@@ -40,21 +40,24 @@ class Login extends Component{
       <View style={styles.container}>
         <Image style={styles.logo} source={require('./Octocat.png')} />
           <Text style={styles.heading}>
-          Github browser
+          Pulse
           </Text>
+
         <TextInput
           onChangeText={(text)=> this.setState({userName: text})}
           style={styles.input}
-          placeholder="Github username"/>
+          placeholder="username"/>
+
         <TextInput
           onChangeText={(text) => this.setState({password: text})}
           style={styles.input}
-          placeholder="Github password"
+          placeholder="password"
           secureTextEntry={true}/>
+
           <TouchableHighlight
             style={styles.button}
             onPress={this.onLoginPress.bind(this)}>
-              <Text style={styles.buttonText}>Log in</Text>
+              <Text style={styles.buttonText}>Log in with Google</Text>
           </TouchableHighlight>
 
           {errorCtrl}
