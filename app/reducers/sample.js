@@ -1,4 +1,4 @@
-import { SAMPLE_CONSTANT } from '../constants.jsx'
+import { SAMPLE_CONSTANT } from '../constants'
 
 const initialState = {
   /*
@@ -6,7 +6,7 @@ const initialState = {
   */
 }
 
-export default function(state=initialState, action) {
+export default function(state = initialState, action) {
   const newState = Object.assign({}, state)
 
   switch (action.type) {

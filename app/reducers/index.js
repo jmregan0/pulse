@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
 
 const rootReducer = combineReducers({
-  sample: require('./sample.jsx').default,
+  sample: require('./sample').default,
   // sample2: require('./sample2').default
 })
 
