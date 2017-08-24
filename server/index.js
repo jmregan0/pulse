@@ -4,6 +4,9 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const passport = require('passport')
+const FacebookStrategy = require('passport-facebook');
+const GoogleStrategy = require('passport-google-oauth20');
+const { facebook, google } = require('../secrets');
 const path = require('path');
 const db = require('../db/index.js');
 const PORT = process.env.PORT || 3000
@@ -17,6 +20,19 @@ passport.serializeUser((user, done) => done(null, user.id))
 passport.deserializeUser((id, done) => db.models.user.findById(id)
   .then(user => done(null, user))
   .catch(done))
+
+// Transform Facebook profile because Facebook and Google profile objects look different
+// and we want to transform them into user objects that have the same set of attributes
+const transformFacebookProfile = (profile) => ({
+  name: profile.name,
+  avatar: profile.picture.data.url,
+});
+
+// Transform Google profile into user object
+const transformGoogleProfile = (profile) => ({
+  name: profile.displayName,
+  avatar: profile.image.url,
+});
 
 // function to wrap middleware:
 const createApp = () => {
@@ -38,8 +54,57 @@ const createApp = () => {
     resave: false,
     saveUninitialized: false
   }))
+
+
+  passport.use(new FacebookStrategy(facebook,
+    function(accessToken, refreshToken, profile, done){
+      return done(null, transformFacebookProfile(profile._json))
+    }
+  ))
+
+  passport.use(new GoogleStrategy(google,
+    function(accessToken, refreshToken, profile, done){
+      return done(null, transformGoogleProfile(profile._json))
+    }
+  ))
+
+  // // Register Facebook Passport strategy
+  // passport.use(new FacebookStrategy(facebook,
+  //   // Gets called when user authorizes access to their profile
+  //   async (accessToken, refreshToken, profile, done)
+  //  => done(null, transformFacebookProfile(profile._json))
+  // ));
+
+  // Register Google Passport strategy
+  // passport.use(new GoogleStrategy(google,
+  //   async (accessToken, refreshToken, profile, done)
+  //   => done(null, transformGoogleProfile(profile._json))
+  // ));
+
+  // Serialize user into the sessions
+  passport.serializeUser((user, done) => done(null, user));
+
+  // Deserialize user from the sessions
+  passport.deserializeUser((user, done) => done(null, user));
+
   app.use(passport.initialize())
   app.use(passport.session())
+
+  // Set up Facebook auth routes
+app.get('/auth/facebook', passport.authenticate('facebook'));
+
+app.get('/auth/facebook/callback',
+  passport.authenticate('facebook', { failureRedirect: '/auth/facebook' }),
+  // Redirect user back to the mobile app using Linking with a custom protocol OAuthLogin
+  (req, res) => res.redirect('OAuthLogin://login?user=' + JSON.stringify(req.user)));
+
+// Set up Google auth routes
+app.get('/auth/google', passport.authenticate('google', { scope: ['profile'] }));
+
+app.get('/auth/google/callback',
+  passport.authenticate('google', { failureRedirect: '/auth/google' }),
+  (req, res) => res.redirect('OAuthLogin://login?user=' + JSON.stringify(req.user)));
+
 
   // auth route
   // app.use('/auth', require('./auth'))

@@ -9,14 +9,13 @@ import { Provider } from 'react-redux';
 import store from './app/store'
 import {
   AppRegistry,
-  StyleSheet,
-  Text,
-  View,
-  ActivityIndicator
+  StyleSheet
 } from 'react-native';
-const Login = require('./Login');
-const Tabs = require('./app/components/Tabs')
-const AuthService = require('./AuthService');
+// import Login from './Login';
+import Login from './newLogin';
+import Tabs from './app/components/Tabs';
+import AuthService from './AuthService';
+
 
 const Pulse = React.createClass({
 
@@ -28,6 +27,7 @@ const Pulse = React.createClass({
       })
     })
   },
+
   render: function() {
     // if (this.state.checkingAuth){
     //   return (
@@ -47,10 +47,11 @@ const Pulse = React.createClass({
     //   )
     // } else {
       return (
-        <Login onLogin={this.onLogin} />
+        <Login />
       );
     // }
   },
+
   onLogin: function(){
      this.setState({isLoggedIn: true})
   },
@@ -61,6 +62,7 @@ const Pulse = React.createClass({
     }
   }
 })
+
 
 const styles = StyleSheet.create({
   container: {
@@ -82,4 +84,5 @@ const styles = StyleSheet.create({
 });
 
 module.exports = Pulse
+
 AppRegistry.registerComponent('Pulse', () => Pulse);
